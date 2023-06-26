@@ -10,20 +10,20 @@ pipeline {
     
     stage('Build') {
       steps {
-        sh './mvnw clean package'
-	sh './mvnw clean install'
+        bat './mvnw clean package'
+	bat './mvnw clean install'
       }
     }
     
     stage('Test') {
       steps {
-        sh './mvnw test'
+        bat './mvnw test'
       }
     }
     
     stage('Deploy') {
       steps {
-        sh 'nohup java -jar target/your-application.jar --server.port=8001 > /dev/null 2>&1 &'
+        bat 'java -jar target/your-application.jar --server.port=8001 > /dev/null 2>&1 &'
         sleep 10
       }
     }
