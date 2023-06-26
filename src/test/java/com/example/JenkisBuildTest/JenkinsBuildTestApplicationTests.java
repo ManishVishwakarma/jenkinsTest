@@ -14,6 +14,7 @@ class JenkinsBuildTestApplicationTests {
 
 	@Test
 	void contextLoads() {
+		
 		logger.info("Test Case Exceuted");
 		assertEquals(true, true);
 	}
