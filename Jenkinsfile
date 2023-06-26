@@ -1,18 +1,30 @@
-node {
-  stage("Clone the project") {
-    git branch: 'main', url: 'https://github.com/nkchauhan003/jenkins-demo.git'
-  }
-
-  stage("Compilation") {
-    sh "./mvnw clean install -DskipTests"
-  }
-
-  stage("Tests and Deployment") {
-    stage("Runing unit tests") {
-      sh "./mvnw test -Punit"
+pipeline {
+  agent any
+  
+  stages {
+    stage('Clone') {
+      steps {
+        git branch: 'main', url: 'https://github.com/ManishVishwakarma/jenkinsTest.git'
+      }
     }
-    stage("Deployment") {
-      sh 'nohup ./mvnw spring-boot:run -Dserver.port=8001 &'
+    
+    stage('Build') {
+      steps {
+        sh './mvnw clean package'
+      }
+    }
+    
+    stage('Test') {
+      steps {
+        sh './mvnw test'
+      }
+    }
+    
+    stage('Deploy') {
+      steps {
+        sh 'nohup java -jar target/your-application.jar --server.port=8001 > /dev/null 2>&1 &'
+        sleep 10
+      }
     }
   }
 }
