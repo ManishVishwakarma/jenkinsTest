@@ -20,6 +20,7 @@ public class HelloController {
 	
 	@GetMapping("/greetings")
 	public String greeting() {
+		System.out.println("Inside greetings");
 		return "Greetings from Spring Boot Manish Vishwakarma";
 	}
 }
