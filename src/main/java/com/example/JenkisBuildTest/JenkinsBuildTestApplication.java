@@ -15,6 +15,7 @@ public class JenkinsBuildTestApplication {
 	@PostConstruct
 	public void init() {
 		logger.info("Application Started in Jenkis");
+		logger.info("Application Started in Jenkis Code Commit 3");
 	}
 
 	public static void main(String[] args) {
