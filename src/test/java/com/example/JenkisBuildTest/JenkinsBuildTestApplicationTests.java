@@ -15,7 +15,7 @@ class JenkinsBuildTestApplicationTests {
 	@Test
 	void contextLoads() {
 		
-		
+		logger.info("New logger added");
 		
 		logger.info("Test Case Exceuted");
 		assertEquals(true, true);
