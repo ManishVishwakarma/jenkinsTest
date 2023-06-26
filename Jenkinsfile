@@ -1,31 +1,29 @@
 pipeline {
-  agent any
-  
-  stages {
-    stage('Clone') {
-      steps {
-        git branch: 'main', url: 'https://github.com/ManishVishwakarma/jenkinsTest.git'
-      }
-    }
+    agent any
     
-    stage('Build') {
-      steps {
-        bat './mvnw clean package'
-	bat './mvnw clean install'
-      }
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/ManishVishwakarma/jenkinsTest.git'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                bat 'mvn clean package'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                bat 'mvn test'
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                bat 'mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8082'
+            }
+        }
     }
-    
-    stage('Test') {
-      steps {
-        bat './mvnw test'
-      }
-    }
-    
-    stage('Deploy') {
-      steps {
-        bat 'java -jar target/your-application.jar --server.port=8001 > /dev/null 2>&1 &'
-        sleep 10
-      }
-    }
-  }
 }
